@@ -14,7 +14,7 @@ How to run
 
 This will spawn a local server pointing to [`http://localhost:9090/`](http://localhost:9090/)
 
-How to test
+How to run test cases
 -------
 
 ```$ npm test```
