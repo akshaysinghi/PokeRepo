@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var webpack = require('webpack-stream');
+var webserver = require('gulp-webserver');
 
 gulp.task('scripts', function() {
   return gulp.src('./src/app/index.js')
@@ -20,8 +21,19 @@ gulp.task('css', function() {
   ;
 });
 
-gulp.task('default', ['scripts', 'html', 'css'], function() {
+gulp.task('default', ['scripts', 'html', 'css', 'webserver'], function() {
   gulp.watch('./src/app/**/**.js', ['scripts']);
   gulp.watch('./src/**/**.html', ['html']);
   gulp.watch('./src/**/**.css', ['css']);
+});
+ 
+gulp.task('webserver', ['scripts', 'html', 'css'],  function() {
+  gulp.src('build/')
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: false,
+      open: true,
+      port: 9090,
+      fallback: 'index.html'
+    }));
 });
